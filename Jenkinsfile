@@ -24,8 +24,8 @@ pipeline {
   stage('Docker Build and Tag') {
            steps {
               
-                sh 'docker build -t devopeng121/webApp:latest .' 
-                sh 'docker tag webApp devopeng121/webApp:latest'
+                sh 'docker build -t devopeng121/webapp:latest .' 
+                sh 'docker tag webApp devopeng121/webapp:latest'
                 //sh 'docker tag WebApp devopeng121/WebApp:$BUILD_NUMBER'
                
           }
@@ -35,7 +35,7 @@ pipeline {
           
            steps {
              withDockerRegistry([credentialsId: 'dockerHub',url: ""]) {
-             sh  'docker push devopeng121/webApp:latest'
+             sh  'docker push devopeng121/webapp:latest'
                // sh  'docker push devopeng121/webApp:$BUILD_NUMBER' 
         }
                   
@@ -46,14 +46,14 @@ pipeline {
              
             steps 
 			{
-                sh "docker run -d -p 8002:8080 devopeng121/webApp"
+                sh "docker run -d -p 8002:8080 devopeng121/webapp"
  
             }
         }
  stage('Run Docker container on remote hosts') {
              
             steps {
-                sh "docker -H ssh://jenkins@10.2.1.85 run -d -p 8002:8080 devopeng121/webApp"
+                sh "docker -H ssh://jenkins@10.2.1.85 run -d -p 8002:8080 devopeng121/webapp"
  
             }
         }
