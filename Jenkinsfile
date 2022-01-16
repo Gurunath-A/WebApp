@@ -25,8 +25,8 @@ pipeline {
            steps {
               
                 sh 'docker build -t devopeng121/webapp:latest .' 
-                sh 'docker tag webApp devopeng121/webapp:latest'
-                //sh 'docker tag WebApp devopeng121/WebApp:$BUILD_NUMBER'
+                sh 'docker tag webapp devopeng121/webapp:latest'
+                //sh 'docker tag webapp devopeng121/WebApp:$BUILD_NUMBER'
                
           }
         }
@@ -36,7 +36,7 @@ pipeline {
            steps {
              withDockerRegistry([credentialsId: 'dockerHub',url: ""]) {
              sh  'docker push devopeng121/webapp:latest'
-               // sh  'docker push devopeng121/webApp:$BUILD_NUMBER' 
+               // sh  'docker push devopeng121/webapp:$BUILD_NUMBER' 
         }
                   
           }
